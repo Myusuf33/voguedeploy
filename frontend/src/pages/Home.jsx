@@ -5,7 +5,7 @@ import Topbarber from '../components/Topbarber'
 import Banner from '../components/Banner'
 import BarberCount from '../components/barbercount'
 import Usercomments from '../components/Usercomments'
-import Mobile from '../components/mobile'
+// import Mobile from '../components/mobile'
 
 const Home = () => {
   return (
@@ -16,7 +16,7 @@ const Home = () => {
       <Banner />
       <BarberCount/>
       <Usercomments/>
-      <Mobile/>
+      {/* <Mobile/> */}
 
     </div>
   )
