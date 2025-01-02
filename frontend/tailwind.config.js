@@ -19,8 +19,6 @@
 // }
 
 
-
-
 /** @type {import('tailwindcss').Config} */
 import tailwindScrollbar from 'tailwind-scrollbar';
 
