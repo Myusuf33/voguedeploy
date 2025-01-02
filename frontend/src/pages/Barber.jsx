@@ -1,6 +1,6 @@
 import React from 'react';
 import BarberCount from '../components/barbercount';
-import Mobile from '../components/mobile';
+// import Mobile from '../components/mobile';
 
 const App = () => {
   return (
@@ -248,7 +248,7 @@ const App = () => {
       </div>
      </section>
      <BarberCount/>
-    <Mobile/>
+    {/* <Mobile/> */}
     </div>
 
    </body>
