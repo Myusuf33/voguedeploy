@@ -10,7 +10,7 @@ import barberRouter from "./routes/doctorRoute.js";
 import adminRouter from "./routes/adminRoute.js";
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 // Connect to MongoDB and Cloudinary
 connectDB();
