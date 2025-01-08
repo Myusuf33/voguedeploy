@@ -55,9 +55,12 @@ import adminRouter from "./routes/adminRoute.js";
 const app = express();
 const port = process.env.PORT || 4000;
 
-// Hardcoded CORS configuration for production
+// Allowing multiple origins in CORS configuration
 const corsOptions = {
-  origin: "https://voguedeploy-jtu2.vercel.app", // Update to your production URL
+  origin: [
+    "https://voguedeploy-jtu2.vercel.app", // Allow this origin
+    "https://voguedeploy.vercel.app",      // Also allow this origin
+  ],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,  // Enable cookies or other credentials if required
 };
@@ -78,7 +81,7 @@ connectServices();
 
 // Middlewares
 app.use(express.json());
-app.use(cors(corsOptions)); // Applying CORS middleware with hardcoded production URL
+app.use(cors(corsOptions)); // Apply CORS middleware with multiple origins
 
 // API Endpoints
 app.use("/api/user", userRouter); // User routes
