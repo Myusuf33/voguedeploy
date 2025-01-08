@@ -169,7 +169,7 @@ const bookAppointment = async (req, res) => {
   
       delete docData.slots_booked;
       
-      console.log(selectedService)
+
 
       const appointmentData = {
         userId,
@@ -192,7 +192,7 @@ const bookAppointment = async (req, res) => {
     //  res.json({ success: true, message: 'Appointment Booked' });
   
     } catch (error) {
-      console.log(error);
+      
       res.json({ success: false, message: error.message });
     }
   };
