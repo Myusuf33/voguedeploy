@@ -70,34 +70,33 @@
 // export default Navbar
 
 
-
 import React, { useState, useEffect } from 'react'
 import { assets } from '../assets/assets'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
-
   const navigate = useNavigate()
 
   const [showMenu, setShowMenu] = useState(false)
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(false) // Start with false, assuming user is not logged in
 
   // Check if the token is present in localStorage or sessionStorage
   useEffect(() => {
-    const userToken = localStorage.getItem('userToken') || sessionStorage.getItem('userToken');
+    const userToken = localStorage.getItem('userToken') || sessionStorage.getItem('userToken')
     if (userToken) {
-      setToken(true)
+      setToken(true) // User is logged in
     } else {
-      setToken(false)
+      setToken(false) // User is not logged in
     }
-  }, [])
+  }, []) // Runs once when the component mounts
 
   // Handle logout functionality
   const handleLogout = () => {
-    localStorage.removeItem('userToken');
-    sessionStorage.removeItem('userToken');
-    setToken(false);
-    navigate('/');
+    // Remove token from storage on logout
+    localStorage.removeItem('userToken')
+    sessionStorage.removeItem('userToken')
+    setToken(false) // Update state to show "Create account"
+    navigate('/') // Redirect to home page or login page
   }
 
   return (
