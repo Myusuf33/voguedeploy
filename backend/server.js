@@ -61,6 +61,7 @@ const corsOptions = {
     "https://voguedeploy.vercel.app",      // Also allow this origin
   ],
   methods: ["POST", "GET", "PUT", "DELETE"],
+  credentials: true
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 
