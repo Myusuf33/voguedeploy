@@ -42,7 +42,6 @@
 
 // // Start server
 // app.listen(port, () => console.log(`Server started on PORT:${port}`));
-
 import express from "express";
 import cors from "cors";
 import 'dotenv/config';
@@ -58,8 +57,8 @@ const port = process.env.PORT || 4000;
 // Allowing multiple origins in CORS configuration
 const corsOptions = {
   origin: [
-    "https://voguedeploy.vercel.app", // Allow this origin
-    "https://voguedeploy-4agg.vercel.app",      // Also allow this origin
+    "https://voguedeploy-jtu2.vercel.app", // Allow this origin
+    "https://voguedeploy.vercel.app",      // Also allow this origin
   ],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,  // Enable cookies or other credentials if required
