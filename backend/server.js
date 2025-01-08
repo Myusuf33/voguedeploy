@@ -62,7 +62,6 @@ const corsOptions = {
   ],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true
-  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 // Connect to MongoDB and Cloudinary with error handling
