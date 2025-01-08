@@ -58,7 +58,7 @@ const port = process.env.PORT || 4000;
 // Allowing multiple origins in CORS configuration
 const corsOptions = {
   origin: [
-    "https://voguedeploy-jtu2.vercel.app", // Allow this origin
+    "https://voguedeploy.vercel.app", // Allow this origin
     "https://voguedeploy.vercel.app",      // Also allow this origin
   ],
   methods: ["POST", "GET", "PUT", "DELETE"],
