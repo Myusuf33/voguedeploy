@@ -110,7 +110,6 @@ const Appointment = () => {
 
       if (data.success) {
         toast.success(data.message);
-        getDoctosData();
         navigate("/my-appointments");
       } else {
         toast.error(data.message);
