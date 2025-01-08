@@ -61,7 +61,7 @@ const corsOptions = {
     "https://voguedeploy.vercel.app",      // Also allow this origin
   ],
   methods: ["POST", "GET", "PUT", "DELETE"],
-  credentials: true,  // Enable cookies or other credentials if required
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 // Connect to MongoDB and Cloudinary with error handling
