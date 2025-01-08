@@ -43,10 +43,8 @@
 // // Start server
 // app.listen(port, () => console.log(`Server started on PORT:${port}`));
 
-
-
 import express from "express";
-import cors from 'cors';
+import cors from "cors";
 import 'dotenv/config';
 import connectDB from "./config/mongodb.js";
 import connectCloudinary from "./config/cloudinary.js";
@@ -57,14 +55,21 @@ import adminRouter from "./routes/adminRoute.js";
 const app = express();
 const port = process.env.PORT || 4000;
 
+// Hardcoded CORS configuration for production
+const corsOptions = {
+  origin: "https://voguedeploy-jtu2.vercel.app", // Update to your production URL
+  methods: ["POST", "GET", "PUT", "DELETE"],
+  credentials: true,  // Enable cookies or other credentials if required
+};
+
 // Connect to MongoDB and Cloudinary with error handling
 const connectServices = async () => {
   try {
     await connectDB();
     await connectCloudinary();
-    console.log('Connected to MongoDB and Cloudinary successfully');
+    console.log("Connected to MongoDB and Cloudinary successfully");
   } catch (error) {
-    console.error('Error connecting to services:', error);
+    console.error("Error connecting to services:", error);
     process.exit(1); // Exit the process if connections fail
   }
 };
@@ -73,18 +78,19 @@ connectServices();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions)); // Applying CORS middleware with hardcoded production URL
 
 // API Endpoints
-app.use("/api/user", userRouter);           // User routes
-app.use("/api/admin", adminRouter);         // Admin routes
-app.use("/api/doctor", barberRouter);       // barber routes
+app.use("/api/user", userRouter); // User routes
+app.use("/api/admin", adminRouter); // Admin routes
+app.use("/api/doctor", barberRouter); // Doctor (barber) routes
 
 // Default route
 app.get("/", (req, res) => {
   res.send("API Working");
 });
 
-// Start server
-app.listen(port, () => console.log(`Server started on PORT:${port}`));
-
+// Start the server
+app.listen(port, () => {
+  console.log(`Server started on PORT:${port}`);
+});
