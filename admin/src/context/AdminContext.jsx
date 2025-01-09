@@ -133,7 +133,6 @@
 
 // export default AdminContextProvider
 
-
 import axios from "axios";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
@@ -143,36 +142,53 @@ export const AdminContext = createContext();
 const AdminContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-  const [aToken, setAToken] = useState(localStorage.getItem('aToken') ? localStorage.getItem('aToken') : '');
-
+  const [aToken, setAToken] = useState(localStorage.getItem("aToken") || "");
   const [appointments, setAppointments] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [dashData, setDashData] = useState(false);
 
-  // Axios default configuration with withCredentials
+  // Default Axios configuration for timeout and headers
   const axiosConfig = {
     headers: { aToken },
-    withCredentials: true, // Enable credentials with the request
+    timeout: 5000, // 5 seconds timeout for requests
+  };
+
+  // Error handling function for axios
+  const handleError = (error) => {
+    if (error.response) {
+      // The server responded with a status code outside of the 2xx range
+      toast.error(`Error: ${error.response.data.message || error.message}`);
+    } else if (error.request) {
+      // The request was made but no response was received
+      toast.error("Network error: No response from server.");
+    } else {
+      // Something else went wrong
+      toast.error(`Error: ${error.message}`);
+    }
   };
 
   // Getting all Barber data from Database using API
   const getAllD = async () => {
     try {
-      const { data } = await axios.get(backendUrl + '/api/admin/all-doctors', axiosConfig);
+      const { data } = await axios.get(`${backendUrl}/api/admin/all-doctors`, axiosConfig);
       if (data.success) {
         setDoctors(data.doctors);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      handleError(error);
     }
   };
 
   // Function to change barber availability using API
   const changeAvailability = async (docId) => {
     try {
-      const { data } = await axios.post(backendUrl + '/api/admin/change-availability', { docId }, axiosConfig);
+      const { data } = await axios.post(
+        `${backendUrl}/api/admin/change-availability`,
+        { docId },
+        axiosConfig
+      );
       if (data.success) {
         toast.success(data.message);
         getAllD();
@@ -180,30 +196,32 @@ const AdminContextProvider = (props) => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      handleError(error);
     }
   };
 
   // Getting all appointment data from Database using API
   const getAllAppointments = async () => {
     try {
-      const { data } = await axios.get(backendUrl + '/api/admin/appointments', axiosConfig);
+      const { data } = await axios.get(`${backendUrl}/api/admin/appointments`, axiosConfig);
       if (data.success) {
         setAppointments(data.appointments.reverse());
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
-      console.log(error);
+      handleError(error);
     }
   };
 
   // Function to cancel appointment using API
   const cancelAppointment = async (appointmentId) => {
     try {
-      const { data } = await axios.post(backendUrl + '/api/admin/cancel-appointment', { appointmentId }, axiosConfig);
+      const { data } = await axios.post(
+        `${backendUrl}/api/admin/cancel-appointment`,
+        { appointmentId },
+        axiosConfig
+      );
       if (data.success) {
         toast.success(data.message);
         getAllAppointments();
@@ -211,28 +229,27 @@ const AdminContextProvider = (props) => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
-      console.log(error);
+      handleError(error);
     }
   };
 
   // Getting Admin Dashboard data from Database using API
   const getDashData = async () => {
     try {
-      const { data } = await axios.get(backendUrl + '/api/admin/dashboard', axiosConfig);
+      const { data } = await axios.get(`${backendUrl}/api/admin/dashboard`, axiosConfig);
       if (data.success) {
         setDashData(data.dashData);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      handleError(error);
     }
   };
 
   const value = {
-    aToken, setAToken,
+    aToken,
+    setAToken,
     doctors,
     getAllD,
     changeAvailability,
