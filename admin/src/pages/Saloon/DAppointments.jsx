@@ -25,7 +25,7 @@ const DAppointments = () => {
           <p>#</p>
           <p>Salon</p>
           <p>Payment</p>
-          <p>Age</p>
+          <p>___</p>
           <p>Date & Time</p>
           <p>Fees</p>
           <p>Action</p>
