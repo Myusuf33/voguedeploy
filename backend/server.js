@@ -72,7 +72,8 @@ const corsOptions = {
     "https://voguedeploy-jtu2.vercel.app", // Allow this origin
     "https://voguedeploy.vercel.app",      // Also allow this origin
     "https://voguedeploy-x6fj-2mw7edzh5-hassans-projects-875553d4.vercel.app",
-    "'https://voguedeploy-eyro.vercel.app'"
+    "'https://voguedeploy-eyro.vercel.app'",
+    "https://voguedeploy-mh48.vercel.app"
   ],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
