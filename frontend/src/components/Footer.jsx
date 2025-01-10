@@ -52,7 +52,7 @@ const Footer = () => {
 
         <div>
           <img className='mb-5 w-40' src={assets.logo} alt="" />
-          <p className='w-full md:w-2/3 text-gray-600 leading-6'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          <p className='w-full md:w-2/3 text-gray-600 leading-6'>Vogue Vibe is a modern salon management system designed to provide users with a seamless and convenient experience. This platform allows users to schedule salon appointments, browse services, and make online payments effortlessly. The front-end is developed using React.js and Bootstrap, while the back-end is built with Node.js and Express.js. With integrated payment methods, Vogue Vibe offers a comprehensive and professional solution that ensures efficiency and ease for its users.</p>
         </div>
 
         <div>
