@@ -122,7 +122,10 @@ const App = () => {
          <div class="flex justify-between items-center">
        
        
-          <button class="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors duration-300 flex items-center gap-2">
+           <button
+  className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors duration-300 flex items-center gap-2"
+  onClick={() => window.location.href = '/saloons'}
+>
            Book Now
            <i class="fas fa-arrow-right">
            </i>
