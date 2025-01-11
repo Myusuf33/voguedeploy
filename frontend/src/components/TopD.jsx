@@ -45,10 +45,14 @@ import { AppContext } from '../context/AppContext'
 const TopSaloons = () => {
     const navigate = useNavigate()
     const { salons } = useContext(AppContext) // Access salons from the context
-    const [filterAvailable, setFilterAvailable] = useState(true); // Default filter to show only available salons
+    const [filterAvailable, setFilterAvailable] = useState("all"); // Default filter to show all salons
 
-    // Filter salons based on availability
-    const filteredSaloons = salons.filter(salon => salon.available === filterAvailable);
+    // Filter salons based on the selected availability filter
+    const filteredSaloons = salons.filter(salon => {
+        if (filterAvailable === "all") return true; // Show all salons
+        if (filterAvailable === "available") return salon.available === true; // Show only available salons
+        return salon.available === false; // Show only unavailable salons
+    });
 
     return (
         <div className='flex flex-col items-center gap-4 my-16 text-gray-900 md:mx-10'>
@@ -58,16 +62,22 @@ const TopSaloons = () => {
             {/* Filter buttons */}
             <div className='mb-4'>
                 <button
-                    onClick={() => setFilterAvailable(true)}
-                    className={`p-2 m-2 bg-blue-500 text-white rounded ${filterAvailable ? 'bg-blue-700' : ''}`}
+                    onClick={() => setFilterAvailable("all")}
+                    className={`p-2 m-2 bg-blue-500 text-white rounded ${filterAvailable === "all" ? 'bg-blue-700' : ''}`}
+                >
+                    Show All
+                </button>
+                <button
+                    onClick={() => setFilterAvailable("available")}
+                    className={`p-2 m-2 bg-blue-500 text-white rounded ${filterAvailable === "available" ? 'bg-blue-700' : ''}`}
                 >
                     Show Available
                 </button>
                 <button
-                    onClick={() => setFilterAvailable(false)}
-                    className={`p-2 m-2 bg-blue-500 text-white rounded ${!filterAvailable ? 'bg-blue-700' : ''}`}
+                    onClick={() => setFilterAvailable("unavailable")}
+                    className={`p-2 m-2 bg-blue-500 text-white rounded ${filterAvailable === "unavailable" ? 'bg-blue-700' : ''}`}
                 >
-                    Show All
+                    Show Unavailable
                 </button>
             </div>
 
