@@ -208,7 +208,7 @@ const Doctors = () => {
         return { ...doc, distance };
       })
       .filter((doc) => doc !== null) // Remove invalid entries
-      .filter((doc) => doc.available) // Filter out unavailable doctors
+      .filter((doc) => doc.available) // Filter out unavailable
       .filter((doc) => {
         if (rangeFilter === "all") return true; // No filter
         const [min, max] = rangeFilter.split("-").map(Number);
@@ -229,7 +229,7 @@ const Doctors = () => {
         <button onClick={() => setRangeFilter("15-20")} className="p-2 m-2 bg-blue-500 text-white rounded">15-20 km</button>
       </div>
 
-      <p className="text-gray-600">Doctors sorted by proximity:</p>
+      <p className="text-gray-600">Saloon sorted by proximity:</p>
       <div className="w-full grid grid-cols-auto gap-4 gap-y-6">
         {sortedDoc.length > 0 ? (
           sortedDoc.map((item, index) => (
