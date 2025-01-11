@@ -104,12 +104,12 @@ const MyProfile = () => {
                         : <p className='text-gray-500'>{userData.gender}</p>
                     }
 
-                    <p className='font-medium'>Birthday:</p>
+{/*                     <p className='font-medium'>Birthday:</p>
 
                     {isEdit
                         ? <input className='max-w-28 bg-gray-50' type='date' onChange={(e) => setUserData(prev => ({ ...prev, dob: e.target.value }))} value={userData.dob} />
                         : <p className='text-gray-500'>{userData.dob}</p>
-                    }
+                    } */}
 
                 </div>
             </div>
