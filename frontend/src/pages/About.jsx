@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import BarberShop from '../components/BarberShop';  // Adjust the path if necessary
 import SalonPage from '../components/salonpage';
@@ -34,10 +32,6 @@ function App() {
                 <img class="w-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/team/6/team-member-3.jpg" alt="" />
             </div>
         </div>
-
-        {/* <div class="mt-8 text-center md:mt-16">
-            <a href="#" title="" class="inline-flex items-center justify-center py-4 font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md px-14 hover:bg-blue-700 focus:bg-blue-700" role="button"> Join our team </a>
-        </div> */}
     </div>
 </section>
 

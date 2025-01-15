@@ -12,7 +12,7 @@ const API_URL = "http://localhost:4000/api/worker";
 
 const Appointment = () => {
   const { docId } = useParams();
-  const { doctors, currencySymbol, backendUrl, token, getDoctosData } =
+  const { doc, currencySymbol, backendUrl, token, getDoctosData } =
     useContext(AppContext);
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -39,7 +39,7 @@ const Appointment = () => {
   const navigate = useNavigate();
 
   const fetchDocInfo = async () => {
-    const docInfo = doctors.find((doc) => doc._id === docId);
+    const docInfo = doc.find((doc) => doc._id === docId);
     setDocInfo(docInfo);
   };
 
@@ -168,10 +168,10 @@ const Appointment = () => {
 
 
   useEffect(() => {
-    if (doctors.length > 0) {
+    if (doc.length > 0) {
       fetchDocInfo();
     }
-  }, [doctors, docId]);
+  }, [doc, docId]);
 
   useEffect(() => {
     if (docInfo) {
