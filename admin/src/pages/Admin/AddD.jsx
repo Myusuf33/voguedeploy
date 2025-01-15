@@ -237,19 +237,21 @@ import { AdminContext } from "../../context/AdminContext";
 import { AppContext } from "../../context/AppContext";
 
 const AddD = () => {
-    const [docImg, setDocImg] = useState(false);
-    const [name, setName] = useState("");
+    const [docImg, setDocImg] = useState(null);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [fees, setFees] = useState("");
     const [about, setAbout] = useState("");
+    const [name, setName] = useState("");
     const [address1, setAddress1] = useState("");
     const [services, setServices] = useState([]);
+    const [workers, setWorkers] = useState([""]); // Only worker names
     const { backendUrl } = useContext(AppContext);
     const { aToken } = useContext(AdminContext);
 
+    // Hardcoded values for unused fields
     const speciality = "NAN";
-    const degree = "NAN";
+    const degree =  "nab";
     const experience = "NAN";
 
     const onSubmitHandler = async (event) => {
@@ -265,30 +267,33 @@ const AddD = () => {
             formData.append("name", name);
             formData.append("email", email);
             formData.append("password", password);
-            formData.append("experience", experience);
+            formData.append("experience",experience); // Hardcoded
             formData.append("fees", Number(fees));
             formData.append("about", about);
-            formData.append("speciality", speciality);
-            formData.append("degree", degree);
+            formData.append("speciality",speciality); // Hardcoded
+            formData.append("degree", degree); // Hardcoded
             formData.append("address", JSON.stringify({ line1: address1 }));
             formData.append("services", JSON.stringify(services));
+            formData.append("workers", JSON.stringify(workers)); // Send only worker names
 
+          
             const { data } = await axios.post(backendUrl + "/api/admin/add-Saloon", formData, {
                 headers: { aToken },
             });
 
             if (data.success) {
                 toast.success(data.message);
-                setDocImg(false);
+                setDocImg(null);
+                setEmail("");
                 setName("");
                 setPassword("");
-                setEmail("");
                 setAddress1("");
                 setAbout("");
                 setFees("");
                 setServices([]);
+                setWorkers([""]); // Reset worker list
             } else {
-                toast.error(data.message);
+                toast.error(error.message);
             }
         } catch (error) {
             toast.error(error.message);
@@ -332,13 +337,24 @@ const AddD = () => {
         setServices(updatedServices);
     };
 
+    const handleAddWorker = () => {
+        setWorkers([...workers, ""]); // Add an empty string for a new worker name
+    };
+
+    const handleWorkerChange = (e, index) => {
+        const updatedWorkers = [...workers];
+        updatedWorkers[index] = e.target.value;
+        setWorkers(updatedWorkers);
+    };
+
     const handleDeleteService = (index) => {
         const updatedServices = services.filter((_, i) => i !== index);
         setServices(updatedServices);
     };
 
-    const handleSaveServices = () => {
-        toast.success("Services saved successfully!");
+    const handleDeleteWorker = (index) => {
+        const updatedWorkers = workers.filter((_, i) => i !== index);
+        setWorkers(updatedWorkers);
     };
 
     return (
@@ -362,13 +378,13 @@ const AddD = () => {
                     <p className="text-sm">Upload Saloon Picture</p>
                 </div>
                 <div className="space-y-6">
-                    <input
-                        type="text"
-                        placeholder="Saloon Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                <input
+                     type="text"
+                         placeholder="Saloon Name"
+                         value={name}
+                         onChange={(e) => setName(e.target.value)}
+                         className="w-full py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                     />
                     <input
                         type="email"
                         placeholder="Email"
@@ -406,6 +422,8 @@ const AddD = () => {
                             className="w-full mt-3 py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
+
+                    {/* Service Section */}
                     <div className="space-y-4">
                         <button
                             type="button"
@@ -415,25 +433,54 @@ const AddD = () => {
                             Add Service
                         </button>
                         {services.map((service, index) => (
-                            <div key={index} className="flex gap-4 items-center">
+                            <div key={index} className="flex gap-4">
                                 <input
                                     type="text"
                                     placeholder="Service Name"
                                     value={service.service}
                                     onChange={(e) => handleServiceNameChange(e, index)}
-                                    className="w-1/3 py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-1/2 py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                                 <input
                                     type="number"
                                     placeholder="Service Fee"
                                     value={service.fee}
                                     onChange={(e) => handleServiceChange(e, index)}
-                                    className="w-1/3 py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-1/2 py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => handleDeleteService(index)}
-                                    className="py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                                    className="text-red-500 hover:text-red-700"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Worker Section */}
+                    <div className="space-y-4">
+                        <button
+                            type="button"
+                            onClick={handleAddWorker}
+                            className="py-2 px-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        >
+                            Add Worker
+                        </button>
+                        {workers.map((worker, index) => (
+                            <div key={index} className="flex gap-4">
+                                <input
+                                    type="text"
+                                    placeholder="Worker Name"
+                                    value={worker}
+                                    onChange={(e) => handleWorkerChange(e, index)}
+                                    className="w-full py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => handleDeleteWorker(index)}
+                                    className="text-red-500 hover:text-red-700"
                                 >
                                     Delete
                                 </button>
@@ -441,6 +488,7 @@ const AddD = () => {
                         ))}
                     </div>
                 </div>
+
                 <button
                     type="submit"
                     className="mt-6 py-3 px-6 bg-blue-600 text-white text-xl font-semibold rounded-lg w-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
