@@ -12,7 +12,7 @@ const AdminContextProvider = (props) => {
     const [aToken, setAToken] = useState(localStorage.getItem('aToken') ? localStorage.getItem('aToken') : '')
 
     const [appointments, setAppointments] = useState([])
-    const [doctors, setDoctors] = useState([])
+    const [doctors, setDoc] = useState([])
     const [dashData, setDashData] = useState(false)
 
     // Getting all Barber data from Database using API
@@ -22,7 +22,7 @@ const AdminContextProvider = (props) => {
 
             const { data } = await axios.get(backendUrl + '/api/admin/all-doctors', { headers: { aToken } })
             if (data.success) {
-                setDoctors(data.doctors)
+                setDoc(data.doctors)
             } else {
                 toast.error(data.message)
             }
