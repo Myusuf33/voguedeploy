@@ -51,6 +51,7 @@ app.use(cors(corsOptions)); // Apply CORS middleware with multiple origins
 app.use("/api/user", userRouter); // User routes
 app.use("/api/admin", adminRouter); // Admin routes
 app.use("/api/doctor", barberRouter); 
+app.use("/api/worker", workerRouter); 
 
 // Default route
 app.get("/", (req, res) => {
