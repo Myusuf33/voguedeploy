@@ -7,7 +7,6 @@ import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import barberRouter from "./routes/doctorRoute.js";
 import adminRouter from "./routes/adminRoute.js";
-import workerRouter from "./routes/workerRoute.js/index.js";
 
 
 const app = express();
