@@ -7,7 +7,7 @@ import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import barberRouter from "./routes/doctorRoute.js";
 import adminRouter from "./routes/adminRoute.js";
-import workerRouter from "./routes/workerRoute.js";
+
 
 
 const app = express();
@@ -53,7 +53,7 @@ app.use(cors(corsOptions)); // Apply CORS middleware with multiple origins
 app.use("/api/user", userRouter); // User routes
 app.use("/api/admin", adminRouter); // Admin routes
 app.use("/api/doctor", barberRouter); 
-app.use("/api/worker", workerRouter); // Worker routes
+
 
 
 
