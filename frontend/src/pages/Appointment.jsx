@@ -380,40 +380,7 @@ const Appointment = () => {
 
     
     <div>
-  //     <ul>
-  //   {workers1.map((worker) => {
-  //   let formattedDate1 = "";
-  //         if (selectedDate) {
-  //       // Formatting the date as 'day_month_year' (e.g., '1_2_2025')
-  //       const day = selectedDate.getDate();
-  //       const month = selectedDate.getMonth() + 1; // Add 1 because months are 0-indexed
-  //       const year = selectedDate.getFullYear();
-  //        formattedDate1 = `${day}_${month}_${year}`;
-    
-  //       console.log("Selected date:", formattedDate1);  // Log the formatted date
-  //     } else {
-  //       console.log("No slot selected");
-  //     }
-
-
-  //     const isBooked =
-
-  //       worker._id === docId &&
-  //       worker.date === formattedDate1 &&
-  //       worker.slot === slotTime &&
-  //       worker.name === selectedWorker;
-
-  //     return (
-  //       <li key={worker._id}>
-       
-        
-  //        {worker.shopname}- {worker.name} - {worker.slot} - {worker.date}
-          
-  //         {isBooked && toast(worker._id)} 
-  //       </li>
-  //     );
-  //   })}
-  // </ul>
+  
     </div>
     </div>
   ) : null;
