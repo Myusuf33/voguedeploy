@@ -261,7 +261,7 @@ const Doctors = () => {
             </div>
           ))
         ) : (
-          <p>No doctors found near you.</p>
+          <p>No Saloon found near you.</p>
         )}
       </div>
     </div>
