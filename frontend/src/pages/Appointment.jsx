@@ -586,7 +586,7 @@ const Appointment = () => {
   
       if (data.success) {
         toast.success(data.message);
-        getDoctosData();
+        // getDoctosData();
         navigate("/my-appointments");
       } else {
         toast.error(data.message);
