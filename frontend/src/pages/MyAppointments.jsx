@@ -13,7 +13,9 @@ const MyAppointments = () => {
   const [workers, setWorkers] = useState([]);
   const [paymentStatus, setPaymentStatus] = useState({}); // Track payment status for each appointment
 
-  const API_URL = 'http://localhost:4000/api/worker';
+  // const API_URL = 'http://localhost:4000/api/worker';
+
+    const API_URL = `${backendUrl}/api/worker`
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
