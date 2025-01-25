@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
  
 // const API_URL = "http://localhost:4000/api/worker";
-  const API_URL = `${backendUrl}/api/worker`
+  const API_URL = `https://voguedeploy.vercel.app/api/worker`
 
 const Appointment = () => {
   const { docId } = useParams();
