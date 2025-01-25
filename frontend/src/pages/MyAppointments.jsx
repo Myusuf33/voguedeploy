@@ -240,14 +240,14 @@ const MyAppointments = () => {
         ))}
       </div>
       <div>
-        <ul>
+{/*         <ul>
           {workers.map((worker) => (
             <li key={worker._id}>
               {worker.shopname}-{worker.name} - {worker.slot} - {worker.date}
               <button onClick={() => deleteWorker(worker._id)}>Delete</button>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </div>
   );
