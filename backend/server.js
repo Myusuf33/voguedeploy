@@ -26,7 +26,8 @@ const corsOptions = {
     "https://voguedeploy-mh48-rfsqtx5ra-hassans-projects-875553d4.vercel.app",
     "https://voguedeploy-vz9u.vercel.app",
     "https://voguedeploy-q2qv.vercel.app",
-    "https://voguedeploy-q2qv-qdrqnhhep-hassans-projects-875553d4.vercel.app"
+    "https://voguedeploy-q2qv-qdrqnhhep-hassans-projects-875553d4.vercel.app",
+    "https://voguedeploy-ts4s.vercel.app"
   ],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
