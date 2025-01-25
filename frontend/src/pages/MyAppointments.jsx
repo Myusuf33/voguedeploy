@@ -15,8 +15,7 @@ const MyAppointments = () => {
 
   // const API_URL = 'http://localhost:4000/api/worker';
 
-    const API_URL = `${backendUrl}/api/worker`
-
+  const API_URL = `https://voguedeploy.vercel.app/api/worker`
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   // Function to format the date
