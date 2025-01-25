@@ -272,7 +272,7 @@ const Appointment = () => {
     try {
       // Set selected service fee
       setSelectedService(totalFee);
-      console.log(userData._id);
+   
   
       const { data } = await axios.post(
         backendUrl + "/api/user/book-appointment",
