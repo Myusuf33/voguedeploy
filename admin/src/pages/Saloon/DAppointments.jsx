@@ -188,7 +188,7 @@ const DAppointments = () => {
                 {item.payment ? 'Online' : 'CASH'}
               </p>
             </div>
-{/*             <p className="hidden sm:block">{calculateAge(item.userData.dob)}</p> */}
+            <p className="hidden sm:block">__</p>
             <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
             <p>{currency}{item.amount}</p>
             {item.cancelled ? (
