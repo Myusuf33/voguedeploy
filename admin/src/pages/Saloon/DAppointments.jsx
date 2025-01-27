@@ -74,6 +74,7 @@ const DAppointments = () => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [filter, setFilter] = useState('All');
   const [workerFees, setWorkerFees] = useState({});
+  const [totalIncome, setTotalIncome] = useState(0);
 
   useEffect(() => {
     if (dToken) {
@@ -95,13 +96,29 @@ const DAppointments = () => {
 
     // Calculate total fees for each worker
     const fees = {};
+    let shopIncome = 0;
     appointments.forEach((item) => {
       const worker = item.userData.name;
       if (!fees[worker]) fees[worker] = 0;
       fees[worker] += item.amount;
+
+      // Add income if the appointment is completed
+      if (item.isCompleted) {
+        shopIncome += item.amount;
+      }
     });
     setWorkerFees(fees);
+    setTotalIncome(shopIncome);
   }, [appointments, filter]);
+
+  const handleCompleteAppointment = (appointmentId, workerName, amount) => {
+    completeAppointment(appointmentId);
+    setWorkerFees((prevFees) => ({
+      ...prevFees,
+      [workerName]: (prevFees[workerName] || 0) + amount, // Add the amount to the worker's total fee
+    }));
+    setTotalIncome((prevIncome) => prevIncome + amount); // Add the completed appointment fee to the total income
+  };
 
   return (
     <div className="w-full max-w-6xl mx-auto my-5 p-5 bg-gray-100 rounded-lg shadow-lg">
@@ -139,13 +156,19 @@ const DAppointments = () => {
         </div>
       </div>
 
+      {/* Total Income */}
+      <div className="bg-white p-4 rounded mb-5">
+        <p className="text-lg font-medium mb-3">Total Shop Income</p>
+        <p className="font-semibold">{currency}{totalIncome}</p>
+      </div>
+
       {/* Appointments Table */}
       <div className="bg-white border rounded text-sm max-h-[80vh] overflow-y-scroll">
         <div className="hidden sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 py-3 px-6 border-b">
           <p>#</p>
           <p>Salon</p>
           <p>Payment</p>
-          <p>Age</p>
+          <p>__</p>
           <p>Date & Time</p>
           <p>Fees</p>
           <p>Action</p>
@@ -165,7 +188,7 @@ const DAppointments = () => {
                 {item.payment ? 'Online' : 'CASH'}
               </p>
             </div>
-            <p className="hidden sm:block">{calculateAge(item.userData.dob)}</p>
+{/*             <p className="hidden sm:block">{calculateAge(item.userData.dob)}</p> */}
             <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
             <p>{currency}{item.amount}</p>
             {item.cancelled ? (
@@ -181,7 +204,7 @@ const DAppointments = () => {
                   alt="Cancel"
                 />
                 <img
-                  onClick={() => completeAppointment(item._id)}
+                  onClick={() => handleCompleteAppointment(item._id, item.userData.name, item.amount)}
                   className="w-8 cursor-pointer"
                   src={assets.tick_icon}
                   alt="Complete"
