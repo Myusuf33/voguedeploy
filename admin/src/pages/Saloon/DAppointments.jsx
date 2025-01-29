@@ -46,18 +46,15 @@ const DAppointments = () => {
   }, [appointments, filter]);
 
   const extractWorkerName = (slotDate, slotTime) => {
-    // Extract worker names from the date and time string
+    // Extract worker name as everything after the first "|"
     const workerInfo = `${slotDate}, ${slotTime}`;
-    const workerNames = workerInfo.split('|')[2].trim().split(',')[0].trim();
-    return workerNames;
+    const worker = workerInfo.split('|').slice(1).join('|').trim();
+    return worker;
   };
 
   const formatDateTimeWorker = (slotDate, slotTime) => {
-    // Format the date, time, and worker name
-    const dateTimeWorker = `${slotDate}, ${slotTime}`;
-    const [dateTime, worker] = dateTimeWorker.split('|').map((item) => item.trim());
-    const [date, time] = dateTime.split(',').map((item) => item.trim());
-    return `${date} | ${time} | ${worker.split(',')[0].trim()}`;
+    // Display the date, time, and worker name exactly as they appear
+    return `${slotDate}, ${slotTime}`;
   };
 
   const handleCompleteAppointment = (appointmentId, slotDate, slotTime, amount) => {
