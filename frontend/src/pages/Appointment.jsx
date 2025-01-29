@@ -522,9 +522,9 @@ return docInfo ? (
         <p className="text-gray-600 font-medium mt-4">
           About: <span className="text-gray-800">{docInfo.about}</span>
         </p>
-        <p className="text-gray-600 font-medium mt-4">
+{/*         <p className="text-gray-600 font-medium mt-4">
           Address: <span className="text-gray-800">{docInfo.address.line1}</span>
-        </p>
+        </p> */}
 
         <button
           onClick={handleOpenGoogleMaps}
