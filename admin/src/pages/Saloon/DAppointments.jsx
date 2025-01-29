@@ -48,8 +48,16 @@ const DAppointments = () => {
   const extractWorkerName = (slotDate, slotTime) => {
     // Extract worker names from the date and time string
     const workerInfo = `${slotDate}, ${slotTime}`;
-    const workerNames = workerInfo.split('|')[2].trim();
+    const workerNames = workerInfo.split('|')[2].trim().split(',')[0].trim();
     return workerNames;
+  };
+
+  const formatDateTimeWorker = (slotDate, slotTime) => {
+    // Format the date, time, and worker name
+    const dateTimeWorker = `${slotDate}, ${slotTime}`;
+    const [dateTime, worker] = dateTimeWorker.split('|').map((item) => item.trim());
+    const [date, time] = dateTime.split(',').map((item) => item.trim());
+    return `${date} | ${time} | ${worker.split(',')[0].trim()}`;
   };
 
   const handleCompleteAppointment = (appointmentId, slotDate, slotTime, amount) => {
@@ -111,7 +119,7 @@ const DAppointments = () => {
           <p>Salon</p>
           <p>Payment</p>
           <p>__</p>
-          <p>Date & Time</p>
+          <p>Date & Time & Worker</p>
           <p>Fees</p>
           <p>Action</p>
         </div>
@@ -131,7 +139,7 @@ const DAppointments = () => {
               </p>
             </div>
             <p className="hidden sm:block"></p>
-            <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
+            <p>{formatDateTimeWorker(item.slotDate, item.slotTime)}</p>
             <p>{currency}{item.amount}</p>
             {item.cancelled ? (
               <p className="text-red-400 text-xs font-medium">Cancelled</p>
