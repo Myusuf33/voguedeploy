@@ -161,10 +161,10 @@ const MyAppointments = () => {
           worker.slot === slotTime
       );
 
-      console.log(workerToDelete)
+      // console.log(workerToDelete)
   
       if (!workerToDelete) {
-        toast.error("Worker not found!");
+        // toast.error("Worker not found!");
         return;
       }
   
@@ -176,7 +176,7 @@ const MyAppointments = () => {
       await cancelAppointment(delid);
     } catch (error) {
       console.error('Error in worker deletion and appointment cancellation:', error);
-      toast.error("Failed to delete worker or cancel appointment.");
+      // toast.error("Failed to delete worker or cancel appointment.");
     }
   };
 
@@ -203,7 +203,7 @@ const MyAppointments = () => {
             </div>
             <div className='flex-1 text-sm text-[#5E5E5E]'>
               <p className='text-[#262626] text-base font-semibold'>{item.docData.name}</p>
-              <p>{item.docData.speciality}</p>
+
               <p className='text-[#464646] font-medium mt-1'>Address:</p>
               <p>{item.docData.address.line1}</p>
               <p className='mt-1'>
